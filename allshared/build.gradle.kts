@@ -31,15 +31,15 @@ kotlin {
 val DEV_BUILD: String by project
 
 kmmbridge {
-    buildType.setAndFinalize(
-        if (DEV_BUILD.toBoolean()) {
-            NativeBuildType.DEBUG
-        } else {
-            NativeBuildType.RELEASE
-        }
-    )
+    buildType.setAndFinalize(NativeBuildType.DEBUG)
     gitHubReleaseArtifacts()
     spm(swiftToolVersion = "5.8") {
         iOS { v("14") }
+    }
+}
+
+skie {
+    build {
+        produceDistributableFramework()
     }
 }
